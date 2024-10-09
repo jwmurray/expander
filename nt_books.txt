@@ -1,0 +1,27 @@
+matt:Matthew
+mark:Mark
+luke:Luke
+john:John
+acts:Acts
+rom:Romans
+1-cor:1 Corinthians
+2-cor:2 Corinthians
+gal:Galatians
+eph:Ephesians
+philip:Philippians
+col:Colossians
+1-thes:1 Thessalonians
+2-thes:2 Thessalonians
+1-tim:1 Timothy
+2-tim:2 Timothy
+titus:Titus
+philem:Philemon
+heb:Hebrews
+james:James
+1-pet:1 Peter
+2-pet:2 Peter
+1-jn:1 John
+2-jn:2 John
+3-jn:3 John
+jude:Jude
+rev:Revelation

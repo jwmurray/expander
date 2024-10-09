@@ -1,0 +1,15 @@
+1-ne:1 Nephi,1-ne
+2-ne:2 Nephi,
+jacob:Jacob,
+enos:Enos,
+jarom:Jarom,
+omni:Omni,
+w-of-m:Words of Mormon,wom,w-of-m
+mosiah:Mosiah,
+alma:Alma,
+hel:Helaman,
+3-ne:3 Nephi,
+4-ne:4 Nephi,
+morm:Mormon,
+ether:Ether,
+moro:Moroni,
