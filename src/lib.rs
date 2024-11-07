@@ -125,7 +125,8 @@ impl BookAbbreviation for str {
     }
 
     fn book(&self) -> Option<String> {
-        let result = BOOK_MAP.get(self).map(|&s| s.to_string());
+        let lowercase_self = self.to_ascii_lowercase();
+        let result = BOOK_MAP.get(&lowercase_self).map(|&s| s.to_string());
         match result {
             Some(abbr) => Some(abbr),
             None => self.check_for_starting_word(),
@@ -133,8 +134,9 @@ impl BookAbbreviation for str {
     }
 
     fn check_for_starting_word(&self) -> Option<String> {
+        let lowercase_self = self.to_ascii_lowercase();
         for (key, &value) in BOOK_MAP.entries() {
-            if key.starts_with(self) {
+            if key.to_ascii_lowercase().starts_with(&lowercase_self) {
                 return Some(value.to_string());
             }
         }
@@ -148,13 +150,14 @@ mod tests {
 
     #[test]
     fn test_books_should_expand_to_abbreviation() {
+        assert_eq!("WOM".book(), Some("w-of-m".to_string()));
+        assert_eq!("wom".book(), Some("w-of-m".to_string()));
         assert_eq!("1 Nephi".book(), Some("1-ne".to_string()));
         assert_eq!("1-ne".book(), Some("1-ne".to_string()));
         assert_eq!("3 Nephi".book(), Some("3-ne".to_string()));
         assert_eq!("Matt".book(), Some("matt".to_string()));
         assert_eq!("Matthew".book(), Some("matt".to_string()));
         assert_eq!("Unknown".book(), None);
-        assert_eq!("wom".book(), Some("w-of-m".to_string()));
         assert_eq!("Words of Mormon".book(), Some("w-of-m".to_string()));
     }
 
@@ -238,7 +241,6 @@ mod tests {
         let foo2 = "w-of-m".reference();
         println!("{:?}", foo.unwrap());
         println!("{:?}", foo2.unwrap());
-        let reference = "wom".reference();
 
         assert_eq!(
             "wom".reference().unwrap().return_uri(),

@@ -1,4 +1,4 @@
-use expander::{BookAbbreviation, Reference};
+use expander::BookAbbreviation;
 use std::env;
 
 fn main() {

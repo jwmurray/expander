@@ -11,6 +11,7 @@ fn main() {
     let files = vec![
         ("bofm_books.txt", "bofm"),
         ("nt_books.txt", "nt"),
+        ("ot_books.txt", "ot"),
         ("dc-testament.txt", "dc-testament"),
         ("pgp.txt", "pgp"),
     ]; // Add more files as needed
@@ -34,8 +35,13 @@ fn main() {
                         if key.trim().is_empty() {
                             continue;
                         }
-                        writeln!(f, "    \"{}\" => \"{}\",", key.trim(), abbreviation.trim())
-                            .unwrap();
+                        writeln!(
+                            f,
+                            "    \"{}\" => \"{}\",",
+                            key.trim().to_ascii_lowercase(),
+                            abbreviation.trim()
+                        )
+                        .unwrap();
                     }
                 }
             }
