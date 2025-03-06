@@ -1,1 +1,1 @@
-dc:Doctrine and Covenants,dc,D&C,
+dc:Doctrine and Covenants,dc,d&c

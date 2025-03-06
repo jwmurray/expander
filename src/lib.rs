@@ -90,7 +90,7 @@ impl BookAbbreviation for str {
         let re = Regex::new(
             r"(?x)
             ^\s*
-            (?P<book>[\w\s\-]+?)      # Book name (non-greedy)
+            (?P<book>[\w\s\-&]+?)      # Book name (non-greedy)  Search for letters, spaces, hyphens, and ampersands
             \s*
             (?:
                 (?P<chapter>\d+(-\d+)?)    # Chapter number or range
@@ -159,6 +159,52 @@ mod tests {
         assert_eq!("Matthew".book(), Some("matt".to_string()));
         assert_eq!("Unknown".book(), None);
         assert_eq!("Words of Mormon".book(), Some("w-of-m".to_string()));
+    }
+
+    #[test]
+    fn test_dc() {
+        assert_eq!("Doctrine and Covenants".book(), Some("dc".to_string()));
+        assert_eq!("d&c".book(), Some("dc".to_string()));
+        assert_eq!("D&C".book(), Some("dc".to_string()));
+        assert_eq!(
+            "1 Nephi 3:4".reference(),
+            Some(Reference {
+                book_abbr: "1-ne".to_string(),
+                chapter_opt: Some("3".to_string()),
+                verse_opt: Some(Verse {
+                    verse_str: "4".to_string()
+                }),
+                series: "bofm".to_string(),
+            })
+        );
+        let reference = "D&C 121:34".reference();
+        if reference.is_none() {
+            println!("reference is None");
+        } else {
+            println!("reference: {:?}", reference);
+        }
+        assert_eq!(
+            reference,
+            Some(Reference {
+                book_abbr: "dc".to_string(),
+                chapter_opt: Some("121".to_string()),
+                verse_opt: Some(Verse {
+                    verse_str: "34".to_string()
+                }),
+                series: "dc-testament".to_string(),
+            })
+        );
+        assert_eq!(
+            "Doctrine and Covenants 121:34".reference(),
+            Some(Reference {
+                book_abbr: "dc".to_string(),
+                chapter_opt: Some("121".to_string()),
+                verse_opt: Some(Verse {
+                    verse_str: "34".to_string()
+                }),
+                series: "dc-testament".to_string(),
+            })
+        );
     }
 
     #[test]
